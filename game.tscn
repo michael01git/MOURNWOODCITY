@@ -92,6 +92,7 @@ mesh = SubResource("QuadMesh_80nbo")
 
 [node name="Player" parent="." instance=ExtResource("2_e2o6t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.48237, 1, 0.809197)
+TURN_SPEED = 5
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
