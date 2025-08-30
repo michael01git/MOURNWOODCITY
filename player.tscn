@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://bvgg72dn3sj4b"]
+
+[ext_resource type="Script" uid="uid://gh118a4fn21t" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="Shader" uid="uid://ce2t1j7s8msje" path="res://psx_mesh.gdshader" id="2_onrkg"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i3pqv"]
+render_priority = 0
+shader = ExtResource("2_onrkg")
+shader_parameter/affine_mapping = false
+shader_parameter/alpha_scissor = 0.5
+shader_parameter/jitter = 0.25
+shader_parameter/resolution = Vector2i(320, 240)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4flbx"]
+material = SubResource("ShaderMaterial_i3pqv")
+
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
+script = ExtResource("1_4flbx")
+SPEED = 500
+TURN_SPEED = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_sh265")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_4flbx")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -1)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
