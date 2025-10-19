@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bvgg72dn3sj4b"]
+[gd_scene load_steps=9 format=3 uid="uid://bvgg72dn3sj4b"]
 
 [ext_resource type="Script" uid="uid://gh118a4fn21t" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="Shader" uid="uid://ce2t1j7s8msje" path="res://psx_mesh.gdshader" id="2_onrkg"]
@@ -16,6 +16,14 @@ shader_parameter/resolution = Vector2i(320, 240)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4flbx"]
 material = SubResource("ShaderMaterial_i3pqv")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i3pqv"]
+transparency = 1
+albedo_color = Color(0, 0, 0, 0.588235)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hqtel"]
+material = SubResource("StandardMaterial3D_i3pqv")
+height = 0.001
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
 script = ExtResource("1_4flbx")
@@ -38,3 +46,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 target_position = Vector3(0, 0, -1)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
+
+[node name="Shadow" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+mesh = SubResource("CylinderMesh_hqtel")
