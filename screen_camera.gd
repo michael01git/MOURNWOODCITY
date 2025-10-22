@@ -7,7 +7,8 @@ extends Camera3D
 @onready var area:= get_child(0)
 
 func _ready() -> void:
-	area.connect("body_entered", player_in_area)
+	if area != null:
+		area.connect("body_entered", player_in_area)
 
 func player_in_area(body):
 	current = true

@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://uxxibi0b4w1a"]
+[gd_scene load_steps=6 format=3 uid="uid://uxxibi0b4w1a"]
 
 [ext_resource type="PackedScene" uid="uid://kasm32g18vh6" path="res://OwnPrerenderShader/own_prerender_mesh.tscn" id="2_7jktm"]
 [ext_resource type="PackedScene" uid="uid://bvgg72dn3sj4b" path="res://player.tscn" id="2_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://cskwc4xkmam0s" path="res://screen_camera.tscn" id="3_feb5d"]
 [ext_resource type="Texture2D" uid="uid://blhfu1ptaudup" path="res://psxtutorial/testimage.png" id="4_7jktm"]
-[ext_resource type="PackedScene" uid="uid://d35gw36yvqw62" path="res://area_3d.tscn" id="4_fc0e3"]
 
 [sub_resource type="Environment" id="Environment_7jktm"]
 
@@ -14,7 +13,7 @@
 environment = SubResource("Environment_7jktm")
 
 [node name="Player" parent="." instance=ExtResource("2_e2o6t")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 4.48237, 1, 0.809197)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.0631456, 0, -0.985)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(0.979894, 0.163081, 0.114942, -0.11808, 0.00965041, 0.992957, 0.160824, -0.986565, 0.0287131, 4.17543, 4.18119, 0.822696)
@@ -29,5 +28,3 @@ transform = Transform3D(0.0871558, -0.274589, 0.957604, 0, 0.961262, 0.275637, -
 current = true
 far = 20.0
 screen_texture = ExtResource("4_7jktm")
-
-[node name="Area3D" parent="ScreenCamera" instance=ExtResource("4_fc0e3")]

@@ -31,12 +31,18 @@ void fragment() {
 	position_view.xyz /= position_view.w;
 	float depth = texture(depth_texture, SCREEN_UV).x;
 	float linear_depth = mix(-10, 10, depth);
-
-	//vec4 depthMapRotated = texture(depthImage, rotateUV(UV, vec2(0.5), PI));
-	//if (linearDepth.r > depthMapRotated.r && linearDepth.g > depthMapRotated.g && linearDepth.b > depthMapRotated.b){
-	//	ALBEDO = screen.rgb;
-	//}
-	//else{
-	ALBEDO = texture(baseImage, UV).rgb;
-	//	}
+	
+	//ALBEDO.rgb = vec3(fract(linear_depth));
+	
+	vec4 depthMapRotated = texture(depthImage, rotateUV(UV, vec2(0.5), PI));
+	float depthMapValue = (depthMapRotated.r + depthMapRotated.g + depthMapRotated.b) / 3.0;
+	float linearDepthValue = 15.0*(vec3(fract(linear_depth)).r + vec3(fract(linear_depth)).g + vec3(fract(linear_depth)).b) / 3.0; 
+	
+	if (linearDepthValue > depthMapValue){
+		ALBEDO = screen.rgb;
+	}
+	else{
+		ALBEDO = texture(baseImage, UV).rgb;
+		//ALBEDO = vec3(fract(linear_depth));
+		}
 }
