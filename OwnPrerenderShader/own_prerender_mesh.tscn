@@ -1,0 +1,19 @@
+[gd_scene load_steps=6 format=3 uid="uid://kasm32g18vh6"]
+
+[ext_resource type="Shader" uid="uid://do6iw7mthcn2a" path="res://OwnPrerenderShader/own_prerender_mesh.gdshader" id="1_ih680"]
+[ext_resource type="Texture2D" uid="uid://blhfu1ptaudup" path="res://psxtutorial/testimage.png" id="2_nvxau"]
+[ext_resource type="Texture2D" uid="uid://cw68jsp3134v8" path="res://psxtutorial/depthtestbase.png" id="3_1nb4d"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rttoq"]
+render_priority = 0
+shader = ExtResource("1_ih680")
+shader_parameter/baseImage = ExtResource("2_nvxau")
+shader_parameter/depthImage = ExtResource("3_1nb4d")
+
+[sub_resource type="QuadMesh" id="QuadMesh_rbbmx"]
+material = SubResource("ShaderMaterial_rttoq")
+size = Vector2(2, -2)
+
+[node name="OwnPrerenderMesh" type="MeshInstance3D"]
+process_mode = 3
+mesh = SubResource("QuadMesh_rbbmx")

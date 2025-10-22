@@ -4,11 +4,10 @@ extends CharacterBody3D
 @export var TURN_SPEED: int = 5
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("shoot"):
-		shoot()
-	
-	if Input.is_action_pressed("quit_debug"):
-		get_tree().quit()
+	#if Input.is_action_just_pressed("shoot"):
+	#	shoot()
+	#if Input.is_action_pressed("quit_debug"):
+	#	get_tree().quit()
 	move_player(delta)
 
 func shoot():

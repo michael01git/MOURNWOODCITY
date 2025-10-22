@@ -9,8 +9,8 @@ render_priority = 0
 shader = ExtResource("1_ai2kh")
 shader_parameter/albedo = ExtResource("2_dqj0v")
 shader_parameter/depth_T = ExtResource("3_pr2hs")
-shader_parameter/near = 1.05
-shader_parameter/far = 10.53
+shader_parameter/near = 0.165
+shader_parameter/far = 11.5
 shader_parameter/constant = 0.01
 
 [sub_resource type="QuadMesh" id="QuadMesh_56ueg"]
