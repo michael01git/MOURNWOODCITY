@@ -32,11 +32,12 @@ void fragment() {
 	float depth = texture(depth_texture, SCREEN_UV).x;
 	float linear_depth = mix(-10, 10, depth);
 	
-	//ALBEDO.rgb = vec3(fract(linear_depth));
+	//Boost
+	float smallBoost = 2.5;
 	
 	vec4 depthMapRotated = texture(depthImage, rotateUV(UV, vec2(0.5), PI));
 	float depthMapValue = (depthMapRotated.r + depthMapRotated.g + depthMapRotated.b) / 3.0;
-	float linearDepthValue = 15.0*(vec3(fract(linear_depth)).r + vec3(fract(linear_depth)).g + vec3(fract(linear_depth)).b) / 3.0; 
+	float linearDepthValue = smallBoost*(vec3(fract(linear_depth)).r + vec3(fract(linear_depth)).g + vec3(fract(linear_depth)).b) / 3.0; 
 	
 	if (linearDepthValue > depthMapValue){
 		ALBEDO = screen.rgb;
@@ -45,4 +46,8 @@ void fragment() {
 		ALBEDO = texture(baseImage, UV).rgb;
 		//ALBEDO = vec3(fract(linear_depth));
 		}
+	
+	//These are always done
+	//ALBEDO.rgb = vec3(fract(linear_depth));
+	
 }
