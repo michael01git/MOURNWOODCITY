@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bo260l0o037ya"
-path.s3tc="res://.godot/imported/ss3.png-c606b026cdb24cb3168cdf0003b8ec8d.s3tc.ctex"
+uid="uid://bc2xgh2mierd2"
+path.s3tc="res://.godot/imported/ss5.png-f9357540be98298eca39f8d75cff2c63.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://OwnPrerenderShader/ss3.png"
-dest_files=["res://.godot/imported/ss3.png-c606b026cdb24cb3168cdf0003b8ec8d.s3tc.ctex"]
+source_file="res://OwnPrerenderShader/ss5.png"
+dest_files=["res://.godot/imported/ss5.png-f9357540be98298eca39f8d75cff2c63.s3tc.ctex"]
 
 [params]
 

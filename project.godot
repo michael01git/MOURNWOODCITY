@@ -14,7 +14,7 @@ config/name="CityGame"
 run/main_scene="uid://uxxibi0b4w1a"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="MWDM"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]
@@ -74,3 +74,7 @@ takeSS={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194443,"key_label":0,"unicode":53,"location":0,"echo":false,"script":null)
 ]
 }
+
+[rendering]
+
+anti_aliasing/quality/use_debanding=true

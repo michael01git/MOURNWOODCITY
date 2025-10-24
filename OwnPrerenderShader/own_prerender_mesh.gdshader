@@ -6,7 +6,12 @@ uniform sampler2D baseImage :source_color;
 uniform sampler2D depthImage :source_color;
 
 uniform sampler2D screen_texture : source_color, hint_screen_texture;
-uniform sampler2D depth_texture : source_color, hint_depth_texture;
+uniform sampler2D depth_texture : source_color, hint_depth_texture, filter_nearest;
+//uniform sampler2D true_depth_texture : source_color, hint_depth_texture, filter_nearest;
+
+// These define where the depth map begins / ends. Basically a range for it.
+uniform float blender_max_distance = 25.0;
+uniform float blender_min_distance = 10.0;
 
 void vertex() {
 	POSITION = vec4(VERTEX.xy, 1.0, 1.0);
@@ -23,38 +28,37 @@ vec2 rotateUV(vec2 uv, vec2 pivot, float rotation) {
 }
 
 void fragment() {
-	vec4 screen = texture(screen_texture, SCREEN_UV);
-	
-	float depth_raw = texture(depth_texture, SCREEN_UV).x;
-	vec3 ndc = vec3(SCREEN_UV * 2.0 - 1.0, depth_raw);
-	vec4 position_view = INV_PROJECTION_MATRIX * vec4(ndc, 1.0);
-	position_view.xyz /= position_view.w;
+	// Sample the depth texture
 	float depth = texture(depth_texture, SCREEN_UV).x;
-	float linear_depth = mix(-10, 10, depth);
+	// Convert to normalized device coordinates based on renderer
+	vec3 ndc;
+	if (CURRENT_RENDERER == RENDERER_COMPATIBILITY){
+			ndc = vec3(SCREEN_UV, depth) * 2.0 - 1.0;
+	}
+	else{
+		ndc = vec3(SCREEN_UV * 2.0 - 1.0, depth);
+	}
+	// Convert to view space
+	vec4 view = INV_PROJECTION_MATRIX * vec4(ndc, 1.0);
+	view.xyz /= view.w;
+	float linear_depth = -view.z;
+	// Output raw depth
+	// Calculate ranged depth (normalized between min and max)
+	float min_dist = blender_min_distance;
+	float max_dist = blender_max_distance;
+	float ranged_depth = clamp((linear_depth - min_dist) / (max_dist - min_dist), 0.0, 1.0);
+	float ranged_output = ranged_depth;
 	
 	
-	
-	vec4 depthMapRotated = texture(depthImage, SCREEN_UV);
-	float depthMapValue = (depthMapRotated.r + depthMapRotated.g + depthMapRotated.b);
-	float linearDepthValue = ((vec3(fract(linear_depth)).r + vec3(fract(linear_depth)).g + vec3(fract(linear_depth)).b)); 
 	
 	
 	ALBEDO = texture(baseImage, SCREEN_UV).rgb;
 	
-	if (vec3(fract(linear_depth)) != vec3(0,0,0)){
-		if (linearDepthValue > depthMapValue){
-			ALBEDO = screen.rgb;
-		}
-		
-		//ALBEDO = vec3(fract(linear_depth));
-		}
+	if (ranged_output <= texture(depthImage, SCREEN_UV).r){
+		ALBEDO = texture(screen_texture, SCREEN_UV).rgb;
+	}
 	
-	//These are always done
-	
-	//if (vec3(fract(linear_depth)) != vec3(0,0,0)){
-	//ALBEDO.rgb = vec3(fract(linear_depth));
-	//}
-	//else{ALBEDO.rgb = texture(depthImage, SCREEN_UV).rgb;}
-	
+	// NOTE: Use this to check depthmaps
+	//ALBEDO = vec3(fract(ranged_output));
 	
 }

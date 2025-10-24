@@ -19,6 +19,8 @@ material = SubResource("ShaderMaterial_i3pqv")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i3pqv"]
 albedo_color = Color(0, 0, 0, 1)
+roughness = 0.0
+disable_receive_shadows = true
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_hqtel"]
 material = SubResource("StandardMaterial3D_i3pqv")
@@ -45,6 +47,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 target_position = Vector3(0, 0, -1)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
+visible = false
 
 [node name="Shadow" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.01436, 0)
