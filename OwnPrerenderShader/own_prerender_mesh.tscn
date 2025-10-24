@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://kasm32g18vh6"]
 
 [ext_resource type="Shader" uid="uid://do6iw7mthcn2a" path="res://OwnPrerenderShader/own_prerender_mesh.gdshader" id="1_ih680"]
-[ext_resource type="Texture2D" uid="uid://blhfu1ptaudup" path="res://psxtutorial/testimage.png" id="2_nvxau"]
-[ext_resource type="Texture2D" uid="uid://wu8ttf1pena8" path="res://OwnPrerenderShader/owntest.png" id="3_nvxau"]
+[ext_resource type="Texture2D" uid="uid://07atfsdm8hk" path="res://OwnPrerenderShader/sceneImage.png" id="2_nvxau"]
+[ext_resource type="Texture2D" uid="uid://bo260l0o037ya" path="res://OwnPrerenderShader/ss3.png" id="3_nvxau"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rttoq"]
 render_priority = 0

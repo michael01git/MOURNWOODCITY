@@ -18,12 +18,11 @@ shader_parameter/resolution = Vector2i(320, 240)
 material = SubResource("ShaderMaterial_i3pqv")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i3pqv"]
-transparency = 1
-albedo_color = Color(0, 0, 0, 0.588235)
+albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_hqtel"]
 material = SubResource("StandardMaterial3D_i3pqv")
-height = 0.001
+height = 0.025
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
 script = ExtResource("1_4flbx")
@@ -48,5 +47,5 @@ target_position = Vector3(0, 0, -1)
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 
 [node name="Shadow" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.01436, 0)
 mesh = SubResource("CylinderMesh_hqtel")

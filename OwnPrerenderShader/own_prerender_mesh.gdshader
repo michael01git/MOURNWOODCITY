@@ -3,10 +3,10 @@ shader_type spatial;
 render_mode unshaded, fog_disabled;
 
 uniform sampler2D baseImage :source_color;
-uniform sampler2D depthImage;
+uniform sampler2D depthImage :source_color;
 
 uniform sampler2D screen_texture : source_color, hint_screen_texture;
-uniform sampler2D depth_texture : hint_depth_texture;
+uniform sampler2D depth_texture : source_color, hint_depth_texture;
 
 void vertex() {
 	POSITION = vec4(VERTEX.xy, 1.0, 1.0);
@@ -32,22 +32,29 @@ void fragment() {
 	float depth = texture(depth_texture, SCREEN_UV).x;
 	float linear_depth = mix(-10, 10, depth);
 	
-	//Boost
-	float smallBoost = 2.5;
 	
-	vec4 depthMapRotated = texture(depthImage, rotateUV(UV, vec2(0.5), PI));
-	float depthMapValue = (depthMapRotated.r + depthMapRotated.g + depthMapRotated.b) / 3.0;
-	float linearDepthValue = smallBoost*(vec3(fract(linear_depth)).r + vec3(fract(linear_depth)).g + vec3(fract(linear_depth)).b) / 3.0; 
 	
-	if (linearDepthValue > depthMapValue){
-		ALBEDO = screen.rgb;
-	}
-	else{
-		ALBEDO = texture(baseImage, UV).rgb;
+	vec4 depthMapRotated = texture(depthImage, SCREEN_UV);
+	float depthMapValue = (depthMapRotated.r + depthMapRotated.g + depthMapRotated.b);
+	float linearDepthValue = ((vec3(fract(linear_depth)).r + vec3(fract(linear_depth)).g + vec3(fract(linear_depth)).b)); 
+	
+	
+	ALBEDO = texture(baseImage, SCREEN_UV).rgb;
+	
+	if (vec3(fract(linear_depth)) != vec3(0,0,0)){
+		if (linearDepthValue > depthMapValue){
+			ALBEDO = screen.rgb;
+		}
+		
 		//ALBEDO = vec3(fract(linear_depth));
 		}
 	
 	//These are always done
+	
+	//if (vec3(fract(linear_depth)) != vec3(0,0,0)){
 	//ALBEDO.rgb = vec3(fract(linear_depth));
+	//}
+	//else{ALBEDO.rgb = texture(depthImage, SCREEN_UV).rgb;}
+	
 	
 }

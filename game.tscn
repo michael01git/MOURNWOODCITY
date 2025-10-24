@@ -2,8 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://kasm32g18vh6" path="res://OwnPrerenderShader/own_prerender_mesh.tscn" id="2_7jktm"]
 [ext_resource type="PackedScene" uid="uid://bvgg72dn3sj4b" path="res://player.tscn" id="2_e2o6t"]
-
-[sub_resource type="Environment" id="Environment_7jktm"]
+[ext_resource type="Script" uid="uid://demqhvwcc8npb" path="res://screenshot.gd" id="3_feb5d"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mxhr0"]
 resource_name = "Material"
@@ -167,11 +166,8 @@ data = PackedVector3Array(-1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1,
 
 [node name="game" type="Node3D"]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_7jktm")
-
 [node name="Player" parent="." instance=ExtResource("2_e2o6t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.665721, 1, 2.56954)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.174886, 1, 0.175215)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(0.979894, 0.163081, 0.114942, -0.11808, 0.00965041, 0.992957, 0.160824, -0.986565, 0.0287131, 4.17543, 4.18119, 0.822696)
@@ -186,7 +182,9 @@ spot_range = 50.0
 transform = Transform3D(0.0785996, -0.26877, 0.959992, -1.2517e-06, 0.962971, 0.269604, -0.996906, -0.021192, 0.0756889, 10.5269, 4.51116, 0.726265)
 current = true
 fov = 30.2192
+near = 0.12
 far = 20.0
+script = ExtResource("3_feb5d")
 
 [node name="Point" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 1.89787, 3.51023, 2.56856)
