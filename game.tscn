@@ -1,10 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://uxxibi0b4w1a"]
+[gd_scene load_steps=5 format=3 uid="uid://uxxibi0b4w1a"]
 
 [ext_resource type="PackedScene" uid="uid://kasm32g18vh6" path="res://OwnPrerenderShader/own_prerender_mesh.tscn" id="2_7jktm"]
 [ext_resource type="PackedScene" uid="uid://bvgg72dn3sj4b" path="res://player.tscn" id="2_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://cskwc4xkmam0s" path="res://screen_camera.tscn" id="3_feb5d"]
-[ext_resource type="Texture2D" uid="uid://blhfu1ptaudup" path="res://psxtutorial/testimage.png" id="4_7jktm"]
-[ext_resource type="PackedScene" uid="uid://d35gw36yvqw62" path="res://area_3d.tscn" id="4_fc0e3"]
 
 [sub_resource type="Environment" id="Environment_7jktm"]
 
@@ -22,12 +20,10 @@ light_energy = 3.0
 shadow_enabled = true
 spot_range = 50.0
 
-[node name="OwnPrerenderMesh" parent="." instance=ExtResource("2_7jktm")]
-
 [node name="ScreenCamera" parent="." instance=ExtResource("3_feb5d")]
 transform = Transform3D(0.0871558, -0.274589, 0.957604, 0, 0.961262, 0.275637, -0.996195, -0.0240234, 0.0837795, 10.5, 4.5, -0.7)
 current = true
 far = 20.0
-screen_texture = ExtResource("4_7jktm")
+script = null
 
-[node name="Area3D" parent="ScreenCamera" instance=ExtResource("4_fc0e3")]
+[node name="OwnPrerenderMesh" parent="." instance=ExtResource("2_7jktm")]

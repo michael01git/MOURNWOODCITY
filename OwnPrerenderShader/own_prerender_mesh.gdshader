@@ -1,4 +1,3 @@
-// Godot 4.3, Forward+ or Mobile
 shader_type spatial;
 render_mode unshaded, fog_disabled;
 
@@ -24,7 +23,7 @@ vec2 rotateUV(vec2 uv, vec2 pivot, float rotation) {
 
 void fragment() {
 	vec4 screen = texture(screen_texture, SCREEN_UV);
-	
+
 	float depth_raw = texture(depth_texture, SCREEN_UV).x;
 	vec3 ndc = vec3(SCREEN_UV * 2.0 - 1.0, depth_raw);
 	vec4 position_view = INV_PROJECTION_MATRIX * vec4(ndc, 1.0);
@@ -32,11 +31,12 @@ void fragment() {
 	float depth = texture(depth_texture, SCREEN_UV).x;
 	float linear_depth = mix(-10, 10, depth);
 
+	ALBEDO.rgb = vec3(fract(linear_depth));
 	//vec4 depthMapRotated = texture(depthImage, rotateUV(UV, vec2(0.5), PI));
 	//if (linearDepth.r > depthMapRotated.r && linearDepth.g > depthMapRotated.g && linearDepth.b > depthMapRotated.b){
 	//	ALBEDO = screen.rgb;
 	//}
 	//else{
-	ALBEDO = texture(baseImage, UV).rgb;
+	//ALBEDO = texture(baseImage, UV).rgb;
 	//	}
 }

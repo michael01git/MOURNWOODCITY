@@ -4,6 +4,7 @@ extends Node3D
 @onready var idle_animation_player: AnimationPlayer = $IdleAnimationPlayer
 
 func _process(delta: float) -> void:
+	return ## NOTE Somethings f here
 	if Input.is_action_pressed("move_forward") or Input.is_action_pressed("move_back"):
 		idle_animation_player.stop()
 		run_animation_player.play("Root|Run")
