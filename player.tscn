@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://gh118a4fn21t" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="Shader" uid="uid://ce2t1j7s8msje" path="res://psx_mesh.gdshader" id="2_onrkg"]
 [ext_resource type="PackedScene" uid="uid://butx1tdyeqq70" path="res://Characters/player_model.tscn" id="3_i3pqv"]
-[ext_resource type="AudioStream" uid="uid://solba6f4q5gr" path="res://OwnPrerenderShader/footsteps/boots/0.ogg" id="4_hqtel"]
+[ext_resource type="AudioStream" uid="uid://solba6f4q5gr" path="res://footsteps/boots/0.ogg" id="4_hqtel"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
 
