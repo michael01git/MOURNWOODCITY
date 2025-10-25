@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwdaggof3crox"]
+
+[ext_resource type="Shader" uid="uid://c3ir81fbbormo" path="res://OwnPrerenderShader/Base/pixelator.gdshader" id="1_g8q3w"]
+[ext_resource type="PackedScene" uid="uid://d353126ncl6lg" path="res://Levels/MWTESTLEVEL/test_level.tscn" id="2_g8q3w"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hipen"]
+shader = ExtResource("1_g8q3w")
+shader_parameter/pixelSize = 1
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_06ngt"]
+viewport_path = NodePath("SubViewport")
+
+[node name="pixeltest" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_hipen")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_06ngt")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(1280, 960)
+
+[node name="TestLevel" parent="SubViewport" instance=ExtResource("2_g8q3w")]

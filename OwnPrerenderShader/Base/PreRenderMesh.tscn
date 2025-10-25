@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://kasm32g18vh6"]
+
+[ext_resource type="Shader" uid="uid://do6iw7mthcn2a" path="res://OwnPrerenderShader/Base/PreRenderMesh.gdshader" id="1_mueb3"]
+[ext_resource type="Texture2D" uid="uid://cb5g2cn45d046" path="res://Levels/MWTESTLEVEL/Assets/room1.png" id="2_mueb3"]
+[ext_resource type="Texture2D" uid="uid://buktcfkmsxagl" path="res://Levels/MWTESTLEVEL/Assets/room1-12to32.png" id="3_vlmb4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rttoq"]
+render_priority = 0
+shader = ExtResource("1_mueb3")
+shader_parameter/baseImage = ExtResource("2_mueb3")
+shader_parameter/depthImage = ExtResource("3_vlmb4")
+shader_parameter/blender_max_distance = 25.0
+shader_parameter/blender_min_distance = 10.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_rbbmx"]
+material = SubResource("ShaderMaterial_rttoq")
+size = Vector2(2, -2)
+
+[node name="PreRenderMesh" type="MeshInstance3D" groups=["PRM"]]
+process_mode = 3
+visibility_range_end_margin = 4096.0
+mesh = SubResource("QuadMesh_rbbmx")

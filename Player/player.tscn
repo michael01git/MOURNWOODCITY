@@ -1,0 +1,61 @@
+[gd_scene load_steps=10 format=3 uid="uid://bvgg72dn3sj4b"]
+
+[ext_resource type="Script" uid="uid://gh118a4fn21t" path="res://Player/player.gd" id="1_4flbx"]
+[ext_resource type="Shader" uid="uid://ce2t1j7s8msje" path="res://PSX/psx_mesh.gdshader" id="2_onrkg"]
+[ext_resource type="PackedScene" uid="uid://butx1tdyeqq70" path="res://Player/Characters/player_model.tscn" id="3_i3pqv"]
+[ext_resource type="AudioStream" uid="uid://solba6f4q5gr" path="res://footsteps/boots/0.ogg" id="4_hqtel"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i3pqv"]
+render_priority = 0
+shader = ExtResource("2_onrkg")
+shader_parameter/affine_mapping = false
+shader_parameter/alpha_scissor = 0.5
+shader_parameter/jitter = 0.25
+shader_parameter/resolution = Vector2i(320, 240)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4flbx"]
+material = SubResource("ShaderMaterial_i3pqv")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i3pqv"]
+albedo_color = Color(0, 0, 0, 1)
+roughness = 0.0
+disable_receive_shadows = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hqtel"]
+material = SubResource("StandardMaterial3D_i3pqv")
+height = 0.025
+
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
+collision_layer = 3
+motion_mode = 1
+script = ExtResource("1_4flbx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_sh265")
+
+[node name="PlayerModel" parent="." instance=ExtResource("3_i3pqv")]
+transform = Transform3D(-0.5, 0, -4.37114e-08, 0, 0.5, 0, 4.37114e-08, 0, -0.5, 0, -1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("CapsuleMesh_4flbx")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -1)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+visible = false
+
+[node name="Shadow" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.01436, 0)
+mesh = SubResource("CylinderMesh_hqtel")
+
+[node name="FootstepSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_hqtel")
+volume_db = -10.0
+pitch_scale = 0.6

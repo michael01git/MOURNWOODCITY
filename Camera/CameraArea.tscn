@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://d35gw36yvqw62"]
+
+[ext_resource type="Script" uid="uid://bcxvvr0151hf6" path="res://Camera/camera_area.gd" id="1_bul7j"]
+
+[node name="CameraArea" type="Area3D"]
+top_level = true
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_bul7j")
