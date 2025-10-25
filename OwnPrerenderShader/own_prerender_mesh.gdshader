@@ -54,7 +54,7 @@ void fragment() {
 	
 	ALBEDO = texture(baseImage, SCREEN_UV).rgb;
 	
-	if (ranged_output <= texture(depthImage, SCREEN_UV).r){
+	if (ranged_output != 1.0 && ranged_output <= texture(depthImage, SCREEN_UV).r){
 		ALBEDO = texture(screen_texture, SCREEN_UV).rgb;
 	}
 	

@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=4 uid="uid://uxxibi0b4w1a"]
+[gd_scene load_steps=20 format=4 uid="uid://uxxibi0b4w1a"]
 
 [ext_resource type="PackedScene" uid="uid://kasm32g18vh6" path="res://OwnPrerenderShader/own_prerender_mesh.tscn" id="2_7jktm"]
 [ext_resource type="PackedScene" uid="uid://bvgg72dn3sj4b" path="res://player.tscn" id="2_e2o6t"]
 [ext_resource type="Script" uid="uid://demqhvwcc8npb" path="res://screenshot.gd" id="3_feb5d"]
+[ext_resource type="AudioStream" uid="uid://il0adxf8kxbx" path="res://OwnPrerenderShader/We are safe.wav" id="4_fc0e3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mxhr0"]
 resource_name = "Material"
@@ -183,6 +184,9 @@ current = true
 fov = 30.2192
 script = ExtResource("3_feb5d")
 
+[node name="AudioListener3D" type="AudioListener3D" parent="Camera"]
+current = true
+
 [node name="Point" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 1.89787, 3.51023, 2.56856)
 light_energy = 1.759
@@ -230,3 +234,7 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="testScene/Cube_001/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_7jktm")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_fc0e3")
+autoplay = true

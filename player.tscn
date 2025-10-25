@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bvgg72dn3sj4b"]
+[gd_scene load_steps=10 format=3 uid="uid://bvgg72dn3sj4b"]
 
 [ext_resource type="Script" uid="uid://gh118a4fn21t" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="Shader" uid="uid://ce2t1j7s8msje" path="res://psx_mesh.gdshader" id="2_onrkg"]
 [ext_resource type="PackedScene" uid="uid://butx1tdyeqq70" path="res://Characters/player_model.tscn" id="3_i3pqv"]
+[ext_resource type="AudioStream" uid="uid://solba6f4q5gr" path="res://OwnPrerenderShader/footsteps/boots/0.ogg" id="4_hqtel"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
 
@@ -52,3 +53,9 @@ visible = false
 [node name="Shadow" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.01436, 0)
 mesh = SubResource("CylinderMesh_hqtel")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_hqtel")
+volume_db = -1.0
+max_db = 1.0
+pitch_scale = 0.5
