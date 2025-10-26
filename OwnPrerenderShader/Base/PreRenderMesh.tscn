@@ -18,5 +18,8 @@ size = Vector2(2, -2)
 
 [node name="PreRenderMesh" type="MeshInstance3D" groups=["PRM"]]
 process_mode = 3
+cast_shadow = 0
+extra_cull_margin = 16384.0
+gi_mode = 0
 visibility_range_end_margin = 4096.0
 mesh = SubResource("QuadMesh_rbbmx")

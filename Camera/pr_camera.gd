@@ -22,7 +22,7 @@ func set_active():
 
 func setShaderToCurrent():
 	#Stop culling.
-	prerenderMesh.global_position = player.global_position
+	#prerenderMesh.global_position = global_position
 	
 	
 	prerenderMesh.get_active_material(0).set_shader_parameter("baseImage",baseImage);
@@ -30,5 +30,7 @@ func setShaderToCurrent():
 		prerenderMesh.get_active_material(0).set_shader_parameter("depthImage",depthImage);
 		prerenderMesh.get_active_material(0).set_shader_parameter("blender_max_distance",maxBlenderDepth);
 		prerenderMesh.get_active_material(0).set_shader_parameter("blender_min_distance",minBlenderDepth);
-	else:
+	else: # NOTE: In some cases we dont need/want a depth map. This takes care of that case.
 		prerenderMesh.get_active_material(0).set_shader_parameter("depthImage",backUpDepthImage);
+		prerenderMesh.get_active_material(0).set_shader_parameter("blender_max_distance",100.0);
+		prerenderMesh.get_active_material(0).set_shader_parameter("blender_min_distance",0.0);

@@ -25,9 +25,10 @@ disable_receive_shadows = true
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_hqtel"]
 material = SubResource("StandardMaterial3D_i3pqv")
-height = 0.025
+height = 0.05
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 3
 motion_mode = 1
 script = ExtResource("1_4flbx")
@@ -46,13 +47,28 @@ mesh = SubResource("CapsuleMesh_4flbx")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
+visible = false
 target_position = Vector3(0, 0, -1)
+
+[node name="TravelAreaForwardRay" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+target_position = Vector3(0, -3, 0)
+collision_mask = 4
+
+[node name="TravelAreaBackRay" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+target_position = Vector3(0, -3, 0)
+collision_mask = 4
+
+[node name="TravelAreaNormalRay" type="RayCast3D" parent="."]
+target_position = Vector3(0, -3, 0)
+collision_mask = 4
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 visible = false
 
 [node name="Shadow" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.01436, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 mesh = SubResource("CylinderMesh_hqtel")
 
 [node name="FootstepSound" type="AudioStreamPlayer" parent="."]
