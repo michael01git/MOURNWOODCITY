@@ -6,6 +6,7 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_014or"]
 albedo_texture = ExtResource("2_8t616")
+disable_receive_shadows = true
 
 [sub_resource type="Animation" id="Animation_r5ng3"]
 resource_name = "Root|0_Targeting Pose"

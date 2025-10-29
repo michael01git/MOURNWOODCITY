@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://bapude46osfrg"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_lenka"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o2ukk"]
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_o2ukk"]
+material = SubResource("StandardMaterial3D_o2ukk")
+size = Vector2(51, 51)
+subdivide_width = 100
+subdivide_depth = 100
+
+[node name="Shadowcathcer tett" type="Node3D"]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0845449, 1.579417, -0.17873031)
+mesh = SubResource("BoxMesh_lenka")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07635999, 0.03571284, -6.2947345)
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_o2ukk")
+
+[node name="SpotLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.6939927, 0.71998215, 0, -0.71998215, 0.6939927, -0.35943544, 1.895587, 0.76861453)
+light_energy = 26.415
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+light_specular = 0.0
+shadow_enabled = true
+shadow_reverse_cull_face = true
+shadow_blur = 0.0
+omni_attenuation = -10.0

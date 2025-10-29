@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bvgg72dn3sj4b"]
+[gd_scene load_steps=8 format=3 uid="uid://bvgg72dn3sj4b"]
 
 [ext_resource type="Script" uid="uid://gh118a4fn21t" path="res://Player/player.gd" id="1_4flbx"]
 [ext_resource type="Shader" uid="uid://ce2t1j7s8msje" path="res://PSX/psx_mesh.gdshader" id="2_onrkg"]
@@ -17,15 +17,6 @@ shader_parameter/resolution = Vector2i(320, 240)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4flbx"]
 material = SubResource("ShaderMaterial_i3pqv")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i3pqv"]
-albedo_color = Color(0, 0, 0, 1)
-roughness = 0.0
-disable_receive_shadows = true
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_hqtel"]
-material = SubResource("StandardMaterial3D_i3pqv")
-height = 0.05
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -63,13 +54,6 @@ collision_mask = 4
 [node name="TravelAreaNormalRay" type="RayCast3D" parent="."]
 target_position = Vector3(0, -3, 0)
 collision_mask = 4
-
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
-visible = false
-
-[node name="Shadow" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-mesh = SubResource("CylinderMesh_hqtel")
 
 [node name="FootstepSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_hqtel")

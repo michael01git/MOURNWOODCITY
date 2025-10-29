@@ -5,7 +5,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hipen"]
 shader = ExtResource("1_g8q3w")
-shader_parameter/pixelSize = 1
+shader_parameter/pixelSize = 4
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_06ngt"]
 viewport_path = NodePath("SubViewport")
