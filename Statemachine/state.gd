@@ -1,8 +1,8 @@
 extends Node
 class_name State
 
-var player: CharacterBody2D
-var animation_player: AnimationPlayer
+var player: CharacterBody3D
+var animation_tree: AnimationTree
 
 ## The next state. StateMachine looks at this and if its not null changes to that state.
 var next_state: State

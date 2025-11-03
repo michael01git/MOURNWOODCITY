@@ -1,9 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://bvgg72dn3sj4b"]
+[gd_scene load_steps=12 format=3 uid="uid://bvgg72dn3sj4b"]
 
 [ext_resource type="Script" uid="uid://gh118a4fn21t" path="res://Player/player.gd" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://c8mf8mrahbqlp" path="res://Statemachine/player_state_machine.gd" id="2_k53q1"]
 [ext_resource type="Shader" uid="uid://ce2t1j7s8msje" path="res://PSX/psx_mesh.gdshader" id="2_onrkg"]
+[ext_resource type="Script" uid="uid://bq8cud1o26ybw" path="res://Statemachine/state_walk.gd" id="3_fhl08"]
 [ext_resource type="PackedScene" uid="uid://butx1tdyeqq70" path="res://Player/Characters/player_model.tscn" id="3_i3pqv"]
 [ext_resource type="AudioStream" uid="uid://solba6f4q5gr" path="res://footsteps/boots/0.ogg" id="4_hqtel"]
+[ext_resource type="Script" uid="uid://bx2hbmrl5bvsr" path="res://Statemachine/state_idle.gd" id="4_vtle1"]
+[ext_resource type="Script" uid="uid://co14f1wlmyqvm" path="res://Player/shoot_state.gd" id="5_od3ui"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
 
@@ -19,10 +23,27 @@ shader_parameter/resolution = Vector2i(320, 240)
 material = SubResource("ShaderMaterial_i3pqv")
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 3
 motion_mode = 1
 script = ExtResource("1_4flbx")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+
+[node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("player", "current_state")]
+script = ExtResource("2_k53q1")
+player = NodePath("..")
+current_state = NodePath("WalkState")
+
+[node name="WalkState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("3_fhl08")
+
+[node name="IdleState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("4_vtle1")
+metadata/_custom_type_script = "uid://bh4esielusu21"
+
+[node name="ShootState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("5_od3ui")
+metadata/_custom_type_script = "uid://bh4esielusu21"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_sh265")
@@ -59,3 +80,9 @@ collision_mask = 4
 stream = ExtResource("4_hqtel")
 volume_db = -10.0
 pitch_scale = 0.6
+
+[node name="StateLabel" type="Label" parent="."]
+offset_right = 610.0
+offset_bottom = 228.0
+theme_override_font_sizes/font_size = 128
+text = "AAA"

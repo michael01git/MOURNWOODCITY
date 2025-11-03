@@ -2,9 +2,8 @@ extends Node
 
 ## Based on ChrisTutorials
 
-@export var player: CharacterBody2D
-@onready var animation_player: AnimationPlayer = $"../AnimationPlayer"
-
+@export var player: CharacterBody3D
+@onready var animation_tree: AnimationTree = $"../AnimationTree"
 
 @export var current_state: State
 
@@ -13,12 +12,12 @@ func _ready() -> void:
 	for i in get_children():
 		if i is State:
 			i.player = player
-			i.animation_player = animation_player
+			i.animation_tree = animation_tree
 		else:
 			push_warning("StateMachine has a non state in it.")
 
 func _process(delta: float) -> void:
-	
+	$"../StateLabel".text = current_state.name
 	
 	if current_state.next_state != null:
 		switch_state(current_state.next_state)
