@@ -4,13 +4,14 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_lenka"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_trt6s"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lbqpp"]
 render_priority = 0
 shader = ExtResource("1_lbqpp")
 shader_parameter/shadow_color = Color(0, 0, 0, 1)
+shader_parameter/alpha = 1.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_o2ukk"]
-material = SubResource("ShaderMaterial_trt6s")
+material = SubResource("ShaderMaterial_lbqpp")
 size = Vector2(51, 51)
 subdivide_width = 100
 subdivide_depth = 100
@@ -18,7 +19,11 @@ subdivide_depth = 100
 [node name="Shadowcathcer tett" type="Node3D"]
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0845449, 0.93489194, -0.17873031)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0845449, 0.93489194, -1.2705619)
+mesh = SubResource("BoxMesh_lenka")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0687683, -4.2022834, -4.6346927)
 mesh = SubResource("BoxMesh_lenka")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
@@ -26,7 +31,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07635999, 0.03571284, -6.29
 cast_shadow = 0
 mesh = SubResource("PlaneMesh_o2ukk")
 
-[node name="SpotLight3D" type="OmniLight3D" parent="."]
+[node name="Light" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.6939927, 0.71998215, 0, -0.71998215, 0.6939927, -0.35943544, 1.895587, 0.76861453)
 light_energy = 26.415
 light_indirect_energy = 0.0
