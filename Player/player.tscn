@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bvgg72dn3sj4b"]
+[gd_scene load_steps=13 format=3 uid="uid://bvgg72dn3sj4b"]
 
 [ext_resource type="Script" uid="uid://gh118a4fn21t" path="res://Player/player.gd" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://c8mf8mrahbqlp" path="res://Statemachine/player_state_machine.gd" id="2_k53q1"]
@@ -8,6 +8,8 @@
 [ext_resource type="AudioStream" uid="uid://solba6f4q5gr" path="res://footsteps/boots/0.ogg" id="4_hqtel"]
 [ext_resource type="Script" uid="uid://bx2hbmrl5bvsr" path="res://Statemachine/state_idle.gd" id="4_vtle1"]
 [ext_resource type="Script" uid="uid://co14f1wlmyqvm" path="res://Player/shoot_state.gd" id="5_od3ui"]
+
+[sub_resource type="AnimationRootNode" id="AnimationRootNode_od3ui"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
 
@@ -27,7 +29,13 @@ collision_layer = 3
 motion_mode = 1
 script = ExtResource("1_4flbx")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AnimationTree")
+
 [node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath(".")
+tree_root = SubResource("AnimationRootNode_od3ui")
+anim_player = NodePath("../AnimationPlayer")
 
 [node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("player", "current_state")]
 script = ExtResource("2_k53q1")

@@ -6,7 +6,7 @@ extends Node3D
 
 
 func _process(_delta: float) -> void:
-	if Input.is_action_pressed("move_forward") or Input.is_action_pressed("move_back"):
+	if Input.is_action_pressed("move_forward") or Input.is_action_pressed("move_back") and $"../PlayerStateMachine".current_state:
 		idle_animation_player.stop()
 		run_animation_player.play("Root|Run")
 		if !footstep_sound.playing: footstep_sound.play()
