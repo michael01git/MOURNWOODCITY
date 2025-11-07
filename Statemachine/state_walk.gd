@@ -2,6 +2,7 @@ extends State
 class_name WalkState
 
 @onready var idle_state: IdleState = $"../IdleState"
+@onready var shoot_state: Node = $"../ShootState"
 
 @export var SPEED: int = 5
 
@@ -15,6 +16,9 @@ func state_process(delta: float) -> void:
 	#	shoot()
 	#if Input.is_action_pressed("quit_debug"):
 	#	get_tree().quit()
+	if Input.is_action_pressed("aim"):
+		next_state = shoot_state
+		
 	move_player(delta)
 	
 	

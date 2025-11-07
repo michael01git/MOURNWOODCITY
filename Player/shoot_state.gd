@@ -1,6 +1,7 @@
 extends State
 
 @onready var idle_state: IdleState = $"../IdleState"
+@onready var shoot_sound: AudioStreamPlayer = $"../../ShootSound"
 
 
 func on_enter():
@@ -27,4 +28,5 @@ func aim(delta: float):
 		shoot()
 
 func shoot():
+	shoot_sound.play()
 	print("bang!")
