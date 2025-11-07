@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bvgg72dn3sj4b"]
+[gd_scene load_steps=15 format=3 uid="uid://bvgg72dn3sj4b"]
 
 [ext_resource type="Script" uid="uid://gh118a4fn21t" path="res://Player/player.gd" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://c8mf8mrahbqlp" path="res://Statemachine/player_state_machine.gd" id="2_k53q1"]
@@ -23,6 +23,13 @@ shader_parameter/resolution = Vector2i(320, 240)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4flbx"]
 material = SubResource("ShaderMaterial_i3pqv")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_od3ui"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_od3ui"]
+material = SubResource("StandardMaterial3D_od3ui")
+height = 0.1
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
 collision_layer = 3
@@ -94,3 +101,8 @@ offset_right = 610.0
 offset_bottom = 228.0
 theme_override_font_sizes/font_size = 128
 text = "AAA"
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.85, 0)
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_od3ui")

@@ -1,6 +1,6 @@
 // Godot 4.3, Forward+ or Mobile
 shader_type spatial;
-render_mode unshaded, fog_disabled;
+render_mode unshaded, fog_disabled, ambient_light_disabled;
 
 uniform sampler2D baseImage :source_color;
 uniform sampler2D depthImage :source_color;
@@ -49,14 +49,14 @@ void fragment() {
 	float ranged_depth = clamp((linear_depth - min_dist) / (max_dist - min_dist), 0.0, 1.0);
 	float ranged_output = ranged_depth;
 	
-	
-	
 	//vec4 screen = texture(screen_texture, SCREEN_UV);
 	ALBEDO = texture(baseImage, SCREEN_UV).rgb;
 	
 	if ((ranged_output != 1.0 && ranged_output <= texture(depthImage, SCREEN_UV).r)){
 		ALBEDO = texture(screen_texture, SCREEN_UV).rgb;
 	}
+	
+	
 	
 	// NOTE: Use this to check depthmaps
 	//ALBEDO = vec3(fract(ranged_output));
