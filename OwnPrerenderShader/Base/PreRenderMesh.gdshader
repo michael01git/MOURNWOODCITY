@@ -23,44 +23,38 @@ vec2 rotateUV(vec2 uv, vec2 pivot, float rotation) {
 	) + pivot;
 }
 
-// Return distance for each pixel.
-float get_pixel_depth(mat4 inv_projection_matrix, vec2 screen_uv){
-	float depth = texture(depth_texture, screen_uv).x;
-	vec3 ndc = vec3(screen_uv, depth) * 2.0 - 1.0;
-	vec4 view = inv_projection_matrix * vec4(ndc, 1.0);
-	view.xyz /= view.w;
-	float linear_depth = -view.z;
-	return linear_depth;
-	
-	// https://godotshaders.com/shader/camera-distance-uv-scaling/
-	//vec3 world_camera = (inv_view_matrix * vec4(vec3(0.0), 1.0)).xyz;
-	//vec4 a = inv_view_matrix * vec4(vertex, 1.0);
-	//return distance(a.xyz, world_camera);
-}
-
 void fragment() {
 	
 	// Get pixel depth on screen
-	float pixel_depth = get_pixel_depth(INV_PROJECTION_MATRIX, SCREEN_UV);
+	float depth = texture(depth_texture, SCREEN_UV).x;
+	vec3 ndc = vec3(SCREEN_UV, depth) * 2.0 - 1.0;
+	vec4 view = INV_PROJECTION_MATRIX * vec4(ndc, 1.0);
+	view.xyz /= view.w;
+	float linear_depth = -view.z;
+	float pixel_depth = (1.0/(((-linear_depth)) * 100.0) - 10.0); // Get inverse depth. Value increases furhter away.
 	
 	// Get alpha channel of PRBG
-	float prerender_depth = texture(prerenderBackground, SCREEN_UV).a;
+	float prerender_depth = texture(prerenderBackground, SCREEN_UV).a; // 1000 here because that is the maximum distance from the camera.
 	
 	// Get the texture.
 	vec3 prerender_texture = texture(prerenderBackground, SCREEN_UV).rgb;
 	vec3 game_texture = texture(screen_texture, SCREEN_UV).rgb;
 	
+	ALBEDO = prerender_texture;
 	
-	if ((pixel_depth*100.0) <= (prerender_depth)){
-		ALBEDO = prerender_texture;
-	}
-	else{
+	if ((pixel_depth + 2000.0) < (prerender_depth)){
 		ALBEDO = game_texture;
 	}
 	
 	// NOTE: Use this to check depthmaps
 	// NOTE README !!! For some godforsaken reason godot reimports and loses quality when textures are put to the shaders.
-	//ALBEDO = vec3(max(prerender_depth, 0.0));
+	if ((pixel_depth) < 10000.0){
+		ALBEDO = vec3(1,0,0); //RED
+	}
+	else{
+		ALBEDO = vec3(0,0,1);
+	}
+	
 	//ALBEDO = vec3((pixel_depth*pixel_depth));
 	
 }

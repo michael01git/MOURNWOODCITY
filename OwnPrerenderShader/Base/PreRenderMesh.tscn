@@ -21,3 +21,6 @@ gi_mode = 0
 visibility_range_end_margin = 4096.0
 mesh = SubResource("QuadMesh_rbbmx")
 script = ExtResource("3_mueb3")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+current = true
