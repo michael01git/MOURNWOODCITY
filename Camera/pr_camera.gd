@@ -4,13 +4,7 @@ extends Camera3D
 @onready var player = get_tree().get_first_node_in_group("Player")
 var audio_listener_3d: AudioListener3D
 
-
-@export var baseImage: CompressedTexture2D
-@export var depthImage: CompressedTexture2D
-@onready var backUpDepthImage = load("res://OwnPrerenderShader/Base/Default/baseWhiteDepth.png")
-
-@export var maxBlenderDepth: float
-@export var minBlenderDepth: float
+@export var baseImage: Texture2D
 
 func _ready() -> void:
 	if current:
@@ -23,14 +17,4 @@ func set_active():
 func setShaderToCurrent():
 	#Stop culling.
 	#prerenderMesh.global_position = global_position
-	
-	
-	prerenderMesh.get_active_material(0).set_shader_parameter("baseImage",baseImage);
-	if depthImage != null:
-		prerenderMesh.get_active_material(0).set_shader_parameter("depthImage",depthImage);
-		prerenderMesh.get_active_material(0).set_shader_parameter("blender_max_distance",maxBlenderDepth);
-		prerenderMesh.get_active_material(0).set_shader_parameter("blender_min_distance",minBlenderDepth);
-	else: # NOTE: In some cases we dont need/want a depth map. This takes care of that case.
-		prerenderMesh.get_active_material(0).set_shader_parameter("depthImage",backUpDepthImage);
-		prerenderMesh.get_active_material(0).set_shader_parameter("blender_max_distance",100.0);
-		prerenderMesh.get_active_material(0).set_shader_parameter("blender_min_distance",0.0);
+	prerenderMesh.get_active_material(0).set_shader_parameter("prerenderBackground",baseImage);

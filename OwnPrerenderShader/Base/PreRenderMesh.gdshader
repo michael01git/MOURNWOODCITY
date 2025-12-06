@@ -2,18 +2,14 @@
 shader_type spatial;
 render_mode unshaded, fog_disabled, ambient_light_disabled;
 
-uniform sampler2D baseImage :source_color;
-uniform sampler2D depthImage :source_color;
+uniform sampler2D prerenderBackground : hint_normal;
 
-uniform sampler2D screen_texture : source_color, hint_screen_texture;
-uniform sampler2D depth_texture : source_color, hint_depth_texture, filter_nearest;
+uniform sampler2D screen_texture : hint_screen_texture;
+uniform sampler2D depth_texture : hint_depth_texture;
 //uniform sampler2D true_depth_texture : source_color, hint_depth_texture, filter_nearest;
 
-// These define where the depth map begins / ends. Basically a range for it.
-uniform float blender_max_distance = 25.0;
-uniform float blender_min_distance = 10.0;
-
 void vertex() {
+	// Set the in front of view.
 	POSITION = vec4(VERTEX.xy, 1.0, 1.0);
 }
 
@@ -27,38 +23,44 @@ vec2 rotateUV(vec2 uv, vec2 pivot, float rotation) {
 	) + pivot;
 }
 
-void fragment() {
-	// Sample the depth texture
-	float depth = texture(depth_texture, SCREEN_UV).x;
-	// Convert to normalized device coordinates based on renderer
-	vec3 ndc;
-	if (CURRENT_RENDERER == RENDERER_COMPATIBILITY){
-			ndc = vec3(SCREEN_UV, depth) * 2.0 - 1.0;
-	}
-	else{
-		ndc = vec3(SCREEN_UV * 2.0 - 1.0, depth);
-	}
-	// Convert to view space
-	vec4 view = INV_PROJECTION_MATRIX * vec4(ndc, 1.0);
+// Return distance for each pixel.
+float get_pixel_depth(mat4 inv_projection_matrix, vec2 screen_uv){
+	float depth = texture(depth_texture, screen_uv).x;
+	vec3 ndc = vec3(screen_uv, depth) * 2.0 - 1.0;
+	vec4 view = inv_projection_matrix * vec4(ndc, 1.0);
 	view.xyz /= view.w;
 	float linear_depth = -view.z;
-	// Output raw depth
-	// Calculate ranged depth (normalized between min and max)
-	float min_dist = blender_min_distance;
-	float max_dist = blender_max_distance;
-	float ranged_depth = clamp((linear_depth - min_dist) / (max_dist - min_dist), 0.0, 1.0);
-	float ranged_output = ranged_depth;
+	return linear_depth;
 	
-	//vec4 screen = texture(screen_texture, SCREEN_UV);
-	ALBEDO = texture(baseImage, SCREEN_UV).rgb;
+	// https://godotshaders.com/shader/camera-distance-uv-scaling/
+	//vec3 world_camera = (inv_view_matrix * vec4(vec3(0.0), 1.0)).xyz;
+	//vec4 a = inv_view_matrix * vec4(vertex, 1.0);
+	//return distance(a.xyz, world_camera);
+}
+
+void fragment() {
 	
-	if ((ranged_output != 1.0 && ranged_output <= texture(depthImage, SCREEN_UV).r)){
-		ALBEDO = texture(screen_texture, SCREEN_UV).rgb;
+	// Get pixel depth on screen
+	float pixel_depth = get_pixel_depth(INV_PROJECTION_MATRIX, SCREEN_UV);
+	
+	// Get alpha channel of PRBG
+	float prerender_depth = texture(prerenderBackground, SCREEN_UV).a;
+	
+	// Get the texture.
+	vec3 prerender_texture = texture(prerenderBackground, SCREEN_UV).rgb;
+	vec3 game_texture = texture(screen_texture, SCREEN_UV).rgb;
+	
+	
+	if ((pixel_depth*100.0) <= (prerender_depth)){
+		ALBEDO = prerender_texture;
+	}
+	else{
+		ALBEDO = game_texture;
 	}
 	
-	
-	
 	// NOTE: Use this to check depthmaps
-	//ALBEDO = vec3(fract(ranged_output));
+	// NOTE README !!! For some godforsaken reason godot reimports and loses quality when textures are put to the shaders.
+	//ALBEDO = vec3(max(prerender_depth, 0.0));
+	//ALBEDO = vec3((pixel_depth*pixel_depth));
 	
 }
