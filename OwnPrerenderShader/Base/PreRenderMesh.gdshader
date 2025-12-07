@@ -37,13 +37,12 @@ void fragment() {
 	
 	// Get pixel depth on screen
 	// Sample depth texture.
-	float depth = textureLod(depth_texture, SCREEN_UV, 0.0).r;
+	float depth = texture(depth_texture, SCREEN_UV).r;
 	// Linearize.
-	vec4 upos = INV_PROJECTION_MATRIX * vec4(SCREEN_UV * 2.0 - 1.0, depth, 1.0);
-	vec3 pixel_position = upos.xyz / upos.w;
+	depth = PROJECTION_MATRIX[3][2] / (depth + PROJECTION_MATRIX[2][2]);
 	
 	// Linear depth.
-	float linear_depth = (distance(pixel_position, CAMERA_POSITION_WORLD)); // * some changes because we want meters.
+	float linear_depth = depth; // * some changes because we want meters.
 	
 	// Get alpha channel of PRBG
 	float prerender_depth = texture(prerenderBackground, SCREEN_UV).a; // Currently using non 100* version.
@@ -53,7 +52,7 @@ void fragment() {
 	vec3 game_texture = texture(screen_texture, SCREEN_UV).rgb;
 	
 	ALBEDO = prerender_texture;
-	if ((linear_depth < 1000.0) && (linear_depth >= prerender_depth)){
+	if ((linear_depth < 1000.0) && (linear_depth <= prerender_depth)){
 		ALBEDO = game_texture;
 	}
 	
