@@ -5,7 +5,7 @@ render_mode unshaded, fog_disabled, ambient_light_disabled;
 uniform sampler2D prerenderBackground : hint_normal;
 
 uniform sampler2D screen_texture : hint_screen_texture;
-uniform sampler2D depth_texture : hint_depth_texture;
+uniform sampler2D depth_texture : hint_depth_texture, filter_nearest;
 //uniform sampler2D true_depth_texture : source_color, hint_depth_texture, filter_nearest;
 
 void vertex() {
@@ -23,15 +23,27 @@ vec2 rotateUV(vec2 uv, vec2 pivot, float rotation) {
 	) + pivot;
 }
 
+vec3 test(float test, float value){
+	if ((test) < value){ // is less than
+		return vec3(1,0,0); //RED
+	}
+	else{
+		return vec3(0,0,1);
+	}
+}
+
 void fragment() {
 	
 	// Get pixel depth on screen
+	// Sample depth texture.
 	float depth = texture(depth_texture, SCREEN_UV).x;
+	// Convert to normalized device coordinates
 	vec3 ndc = vec3(SCREEN_UV, depth) * 2.0 - 1.0;
+	// Convert to view space.
 	vec4 view = INV_PROJECTION_MATRIX * vec4(ndc, 1.0);
 	view.xyz /= view.w;
-	float linear_depth = -view.z;
-	float pixel_depth = (1.0/(((-linear_depth)) * 100.0) - 10.0); // Get inverse depth. Value increases furhter away.
+	// Linear depth.
+	float linear_depth = (((view.z) * 100.0) - 10.0) * 100.0; // * some changes because we want meters.
 	
 	// Get alpha channel of PRBG
 	float prerender_depth = texture(prerenderBackground, SCREEN_UV).a; // 1000 here because that is the maximum distance from the camera.
@@ -41,20 +53,15 @@ void fragment() {
 	vec3 game_texture = texture(screen_texture, SCREEN_UV).rgb;
 	
 	ALBEDO = prerender_texture;
-	
-	if ((pixel_depth + 2000.0) < (prerender_depth)){
+	if ((linear_depth) > (prerender_depth)){
 		ALBEDO = game_texture;
 	}
 	
 	// NOTE: Use this to check depthmaps
 	// NOTE README !!! For some godforsaken reason godot reimports and loses quality when textures are put to the shaders.
-	if ((pixel_depth) < 10000.0){
-		ALBEDO = vec3(1,0,0); //RED
-	}
-	else{
-		ALBEDO = vec3(0,0,1);
-	}
+	ALBEDO = test(linear_depth, 15.0); // Red if test is less than value
 	
-	//ALBEDO = vec3((pixel_depth*pixel_depth));
+	//ALBEDO = vec3((linear_depth)*.0);
+	//ALBEDO = vec3(1.0);
 	
 }

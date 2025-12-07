@@ -1,11 +1,11 @@
 [gd_scene load_steps=6 format=3 uid="uid://kasm32g18vh6"]
 
 [ext_resource type="Shader" uid="uid://do6iw7mthcn2a" path="res://OwnPrerenderShader/Base/PreRenderMesh.gdshader" id="1_mueb3"]
-[ext_resource type="Texture2D" uid="uid://ciuvfr2vv1iyt" path="res://Levels/MWTESTLEVEL/newBG/room1.exr" id="2_dekov"]
-[ext_resource type="Script" uid="uid://bkpe170y5bbt2" path="res://OwnPrerenderShader/Base/pre_render_mesh.gd" id="3_mueb3"]
+[ext_resource type="Texture2D" uid="uid://b2kafij7rmykl" path="res://Levels/MWTESTLEVEL/newBG/room1.exr" id="2_dekov"]
+[ext_resource type="Script" path="res://OwnPrerenderShader/Base/pre_render_mesh.gd" id="3_mueb3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rttoq"]
-render_priority = 0
+render_priority = 1
 shader = ExtResource("1_mueb3")
 shader_parameter/prerenderBackground = ExtResource("2_dekov")
 
@@ -21,6 +21,3 @@ gi_mode = 0
 visibility_range_end_margin = 4096.0
 mesh = SubResource("QuadMesh_rbbmx")
 script = ExtResource("3_mueb3")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-current = true
