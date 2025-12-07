@@ -1,8 +1,8 @@
 [gd_scene load_steps=19 format=4 uid="uid://uxxibi0b4w1a"]
 
-[ext_resource type="PackedScene" uid="uid://kasm32g18vh6" path="res://OwnPrerenderShader/Base/PreRenderMesh.tscn" id="2_7jktm"]
-[ext_resource type="PackedScene" uid="uid://bvgg72dn3sj4b" path="res://Player/player.tscn" id="2_e2o6t"]
-[ext_resource type="Script" uid="uid://demqhvwcc8npb" path="res://Camera/Others/screenshot.gd" id="3_feb5d"]
+[ext_resource type="PackedScene" uid="uid://kasm32g18vh6" path="res://Prerender Camera System/PrerenderShader/PreRenderMesh.tscn" id="2_7jktm"]
+[ext_resource type="PackedScene" uid="uid://bvgg72dn3sj4b" path="res://Agents/Player/player.tscn" id="2_e2o6t"]
+[ext_resource type="Script" path="res://Prerender Camera System/Camera/Others/screenshot.gd" id="3_feb5d"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mxhr0"]
 resource_name = "Material"

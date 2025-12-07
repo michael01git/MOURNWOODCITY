@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cdlq5g1gkeml1"]
-
-[ext_resource type="Script" uid="uid://dicvcg6a7wmhj" path="res://Levels/MWTESTLEVEL/shadow_light.gd" id="1_e73n8"]
-
-[node name="ShadowLight" type="DirectionalLight3D"]
-light_energy = 0.0
-shadow_enabled = true
-shadow_blur = 0.0
-script = ExtResource("1_e73n8")

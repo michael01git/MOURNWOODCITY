@@ -15,7 +15,7 @@ run/main_scene="uid://dwdaggof3crox"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="MWDM"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://Assets/icon.svg"
 
 [display]
 

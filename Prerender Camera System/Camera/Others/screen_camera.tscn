@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cskwc4xkmam0s"]
+
+[ext_resource type="Script" uid="uid://clylfvqblulej" path="res://Prerender Camera System/Camera/Others/screen_camera.gd" id="1_kogxf"]
+
+[node name="ScreenCamera" type="Camera3D"]
+script = ExtResource("1_kogxf")

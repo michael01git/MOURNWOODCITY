@@ -1,0 +1,130 @@
+[gd_scene load_steps=18 format=3 uid="uid://bvgg72dn3sj4b"]
+
+[ext_resource type="Script" uid="uid://gh118a4fn21t" path="res://Agents/Player/player.gd" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://c8mf8mrahbqlp" path="res://Agents/Player/Statemachine/player_state_machine.gd" id="2_k53q1"]
+[ext_resource type="Shader" uid="uid://ce2t1j7s8msje" path="res://Shaders/PSX/psx_mesh.gdshader" id="2_onrkg"]
+[ext_resource type="Script" uid="uid://bq8cud1o26ybw" path="res://Agents/Player/Statemachine/States/state_walk.gd" id="3_fhl08"]
+[ext_resource type="PackedScene" uid="uid://butx1tdyeqq70" path="res://Agents/Player/player_model.tscn" id="3_i3pqv"]
+[ext_resource type="AudioStream" uid="uid://solba6f4q5gr" path="res://Assets/Audio/footsteps/boots/0.ogg" id="4_hqtel"]
+[ext_resource type="Script" uid="uid://bx2hbmrl5bvsr" path="res://Agents/Player/Statemachine/States/state_idle.gd" id="4_vtle1"]
+[ext_resource type="Script" uid="uid://co14f1wlmyqvm" path="res://Agents/Player/Statemachine/States/shoot_state.gd" id="5_od3ui"]
+[ext_resource type="AudioStream" uid="uid://ncmrgf88bgax" path="res://Assets/Audio/mike_koenig-shotgun/10 Guage Shotgun-SoundBible.com-74120584.wav" id="9_00tjw"]
+[ext_resource type="Shader" uid="uid://cvbv0f1yj57m2" path="res://Shaders/DitherShader.gdshader" id="10_x3vf3"]
+
+[sub_resource type="AnimationRootNode" id="AnimationRootNode_od3ui"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i3pqv"]
+render_priority = 0
+shader = ExtResource("2_onrkg")
+shader_parameter/affine_mapping = false
+shader_parameter/alpha_scissor = 0.5
+shader_parameter/jitter = 0.25
+shader_parameter/resolution = Vector2i(320, 240)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4flbx"]
+material = SubResource("ShaderMaterial_i3pqv")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x3vf3"]
+shading_mode = 2
+specular_mode = 2
+disable_ambient_light = true
+disable_fog = true
+disable_specular_occlusion = true
+albedo_color = Color(0, 0, 0, 1)
+disable_receive_shadows = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_apopc"]
+render_priority = 0
+shader = ExtResource("10_x3vf3")
+shader_parameter/color = Color(0, 0, 0, 0.8352941)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_od3ui"]
+material = SubResource("ShaderMaterial_apopc")
+height = 0.01
+radial_segments = 16
+rings = 1
+cap_bottom = false
+
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
+collision_layer = 3
+motion_mode = 1
+script = ExtResource("1_4flbx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AnimationTree")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath(".")
+tree_root = SubResource("AnimationRootNode_od3ui")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("player", "current_state")]
+script = ExtResource("2_k53q1")
+player = NodePath("..")
+current_state = NodePath("WalkState")
+
+[node name="WalkState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("3_fhl08")
+
+[node name="IdleState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("4_vtle1")
+metadata/_custom_type_script = "uid://bh4esielusu21"
+
+[node name="ShootState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("5_od3ui")
+metadata/_custom_type_script = "uid://bh4esielusu21"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_sh265")
+
+[node name="PlayerModel" parent="." instance=ExtResource("3_i3pqv")]
+transform = Transform3D(-0.5, 0, -4.37114e-08, 0, 0.5, 0, 4.37114e-08, 0, -0.5, 0, -1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("CapsuleMesh_4flbx")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+visible = false
+target_position = Vector3(0, 0, -1)
+
+[node name="TravelAreaForwardRay" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+target_position = Vector3(0, -3, 0)
+collision_mask = 4
+
+[node name="TravelAreaBackRay" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+target_position = Vector3(0, -3, 0)
+collision_mask = 4
+
+[node name="TravelAreaNormalRay" type="RayCast3D" parent="."]
+target_position = Vector3(0, -3, 0)
+collision_mask = 4
+
+[node name="FootstepSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_hqtel")
+volume_db = -10.0
+pitch_scale = 0.6
+
+[node name="ShootSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_00tjw")
+volume_db = -5.0
+
+[node name="StateLabel" type="Label" parent="."]
+offset_right = 610.0
+offset_bottom = 228.0
+theme_override_font_sizes/font_size = 128
+text = "AAA"
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9693706, 0)
+layers = 2
+material_overlay = SubResource("StandardMaterial3D_x3vf3")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_od3ui")

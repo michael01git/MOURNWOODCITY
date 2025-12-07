@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dk3on8bttvntk"]
+
+[ext_resource type="Script" uid="uid://cs663f5u0ayhp" path="res://Prerender Camera System/Camera/pr_camera.gd" id="1_kvshe"]
+
+[node name="PRCamera" type="Camera3D"]
+current = true
+fov = 30.2192
+script = ExtResource("1_kvshe")
