@@ -34,32 +34,38 @@ vec3 test(float test, float value){
 
 void fragment() {
 	
+	
 	// Get pixel depth on screen
 	// Sample depth texture.
-	float depth = texture(depth_texture, SCREEN_UV).x;
-	// Convert to normalized device coordinates
-	vec3 ndc = vec3(SCREEN_UV, depth) * 2.0 - 1.0;
-	// Convert to view space.
-	vec4 view = INV_PROJECTION_MATRIX * vec4(ndc, 1.0);
-	view.xyz /= view.w;
+	float depth = textureLod(depth_texture, SCREEN_UV, 0.0).r;
+	// Linearize.
+	vec4 upos = INV_PROJECTION_MATRIX * vec4(SCREEN_UV * 2.0 - 1.0, depth, 1.0);
+	vec3 pixel_position = upos.xyz / upos.w;
+	
 	// Linear depth.
-	float linear_depth = (((view.z) * 100.0) - 10.0) * 100.0; // * some changes because we want meters.
+	float linear_depth = (distance(pixel_position, CAMERA_POSITION_WORLD)); // * some changes because we want meters.
 	
 	// Get alpha channel of PRBG
-	float prerender_depth = texture(prerenderBackground, SCREEN_UV).a; // 1000 here because that is the maximum distance from the camera.
+	float prerender_depth = texture(prerenderBackground, SCREEN_UV).a; // Currently using non 100* version.
 	
 	// Get the texture.
 	vec3 prerender_texture = texture(prerenderBackground, SCREEN_UV).rgb;
 	vec3 game_texture = texture(screen_texture, SCREEN_UV).rgb;
 	
 	ALBEDO = prerender_texture;
-	if ((linear_depth) > (prerender_depth)){
+	if ((linear_depth < 1000.0) && (linear_depth >= prerender_depth)){
 		ALBEDO = game_texture;
+	}
+	
+	if ((linear_depth < 1000.0) && (linear_depth >= prerender_depth)){
+		ALBEDO = vec3(1,0,0);
 	}
 	
 	// NOTE: Use this to check depthmaps
 	// NOTE README !!! For some godforsaken reason godot reimports and loses quality when textures are put to the shaders.
-	ALBEDO = test(linear_depth, 15.0); // Red if test is less than value
+	//ALBEDO = test(linear_depth, 3500.0); // Red if test is less than value
+	//ALBEDO = test(linear_depth, 24.0); // Red if less
+	
 	
 	//ALBEDO = vec3((linear_depth)*.0);
 	//ALBEDO = vec3(1.0);
