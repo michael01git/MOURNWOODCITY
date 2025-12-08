@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://bkpe170y5bbt2" path="res://Prerender Camera System/PrerenderShader/pre_render_mesh.gd" id="3_mueb3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rttoq"]
-render_priority = 1
+render_priority = 0
 shader = ExtResource("1_mueb3")
 shader_parameter/prerenderBackground = ExtResource("2_dekov")
 

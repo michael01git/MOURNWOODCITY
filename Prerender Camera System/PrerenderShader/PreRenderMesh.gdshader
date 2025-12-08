@@ -83,7 +83,7 @@ void fragment() {
 	//ALBEDO = test(linear_depth, 24.0); // Red if less
 	
 	
-	//ALBEDO = vec3((linear_depth)*.0);
-	//ALBEDO = vec3(1.0);
+	//ALBEDO = vec3((linear_depth)*.05);
+	//ALBEDO = vec3(texture(screen_texture, SCREEN_UV).rgb);
 	
 }
