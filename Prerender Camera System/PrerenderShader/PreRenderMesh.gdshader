@@ -6,7 +6,7 @@ render_mode unshaded, fog_disabled, ambient_light_disabled;
 //// REIMPORT the texture from the import tab and make it lossless.
 uniform sampler2D prerenderBackground : hint_normal;
 
-uniform sampler2D screen_texture : hint_screen_texture;
+uniform sampler2D screen_texture : hint_screen_texture, filter_linear;
 uniform sampler2D depth_texture : hint_depth_texture, filter_nearest;
 //uniform sampler2D true_depth_texture : source_color, hint_depth_texture, filter_nearest;
 
