@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwdaggof3crox"]
+[gd_scene load_steps=6 format=3 uid="uid://dwdaggof3crox"]
 
 [ext_resource type="Shader" uid="uid://c3ir81fbbormo" path="res://Shaders/Pixelation/pixelator.gdshader" id="1_yoal8"]
+[ext_resource type="PackedScene" uid="uid://b00hwxfwg6b5d" path="res://Shaders/Pixelation/inventory.tscn" id="2_ckjt7"]
 [ext_resource type="PackedScene" uid="uid://d353126ncl6lg" path="res://Rooms/Levels/MWTESTLEVEL/test_level.tscn" id="2_nuq7w"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hipen"]
@@ -27,6 +28,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("ViewportTexture_06ngt")
+
+[node name="Inventory" parent="." instance=ExtResource("2_ckjt7")]
+layout_mode = 1
 
 [node name="SubViewport" type="SubViewport" parent="."]
 size = Vector2i(1280, 960)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bvgg72dn3sj4b"]
+[gd_scene load_steps=19 format=3 uid="uid://bvgg72dn3sj4b"]
 
 [ext_resource type="Script" uid="uid://gh118a4fn21t" path="res://Agents/Player/player.gd" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://c8mf8mrahbqlp" path="res://Agents/Player/Statemachine/player_state_machine.gd" id="2_k53q1"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://solba6f4q5gr" path="res://Assets/Audio/footsteps/boots/0.ogg" id="4_hqtel"]
 [ext_resource type="Script" uid="uid://bx2hbmrl5bvsr" path="res://Agents/Player/Statemachine/States/state_idle.gd" id="4_vtle1"]
 [ext_resource type="Script" uid="uid://co14f1wlmyqvm" path="res://Agents/Player/Statemachine/States/shoot_state.gd" id="5_od3ui"]
+[ext_resource type="Script" uid="uid://c87elpbw8o4lh" path="res://Agents/Player/Inventory/inventory_state.gd" id="6_oad4y"]
 [ext_resource type="AudioStream" uid="uid://ncmrgf88bgax" path="res://Assets/Audio/mike_koenig-shotgun/10 Guage Shotgun-SoundBible.com-74120584.wav" id="9_00tjw"]
 [ext_resource type="Shader" uid="uid://cvbv0f1yj57m2" path="res://Shaders/DitherShader.gdshader" id="10_x3vf3"]
 
@@ -74,6 +75,10 @@ metadata/_custom_type_script = "uid://bh4esielusu21"
 
 [node name="ShootState" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("5_od3ui")
+metadata/_custom_type_script = "uid://bh4esielusu21"
+
+[node name="InventoryState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("6_oad4y")
 metadata/_custom_type_script = "uid://bh4esielusu21"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

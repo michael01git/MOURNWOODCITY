@@ -1,9 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://jcxt5kcshjtu"]
+[gd_scene load_steps=3 format=3 uid="uid://jcxt5kcshjtu"]
 
 [ext_resource type="QuadMesh" uid="uid://bddoxi4u35bo1" path="res://Experimental/particles/fire_particles_mesh.tres" id="1_hegl6"]
+
+[sub_resource type="Curve" id="Curve_hegl6"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="FireParticles" type="CPUParticles3D"]
 amount = 16
 lifetime = 5.0
 mesh = ExtResource("1_hegl6")
 gravity = Vector3(0, 1, 0)
+scale_amount_curve = SubResource("Curve_hegl6")

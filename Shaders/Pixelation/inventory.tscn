@@ -1,0 +1,82 @@
+[gd_scene load_steps=3 format=3 uid="uid://b00hwxfwg6b5d"]
+
+[ext_resource type="Script" uid="uid://cvegxqyxrfawv" path="res://Shaders/Pixelation/inventory.gd" id="1_pnbpu"]
+[ext_resource type="Texture2D" uid="uid://bd4fqk73yocu6" path="res://Assets/icon.svg" id="2_41jgu"]
+
+[node name="Inventory" type="Control" node_paths=PackedStringArray("focus_button") groups=["InventoryUI"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pnbpu")
+focus_button = NodePath("HBoxContainer/MarginContainer/ItemContainer/Button")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(2.4065375e-08, 0.19484255, 0.19484255, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("2_41jgu")
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "AAA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="ItemContainer" type="GridContainer" parent="HBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 2
+
+[node name="Button" type="Button" parent="HBoxContainer/MarginContainer/ItemContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "h"
+
+[node name="Button2" type="Button" parent="HBoxContainer/MarginContainer/ItemContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button3" type="Button" parent="HBoxContainer/MarginContainer/ItemContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button4" type="Button" parent="HBoxContainer/MarginContainer/ItemContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3

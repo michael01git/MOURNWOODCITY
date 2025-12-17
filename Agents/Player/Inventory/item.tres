@@ -1,0 +1,6 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bs8ovtlxnrx61"]
+
+[ext_resource type="Script" uid="uid://c1bhwqple65ti" path="res://Agents/Player/Inventory/item.gd" id="1_e1epc"]
+
+[resource]
+script = ExtResource("1_e1epc")
