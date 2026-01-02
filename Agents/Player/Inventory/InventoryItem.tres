@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://kduixo27cu2m"]
+
+[ext_resource type="Script" uid="uid://rem48ejiy8iu" path="res://Agents/Player/Inventory/inventory_item.gd" id="1_hx4yn"]
+[ext_resource type="Texture2D" uid="uid://btdfivo30q4mv" path="res://Assets/Audio/fireball/all/0041.png" id="2_diorh"]
+
+[resource]
+script = ExtResource("1_hx4yn")
+name = "Ammo"
+texture = ExtResource("2_diorh")

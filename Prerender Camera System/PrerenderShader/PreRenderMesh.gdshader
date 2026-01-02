@@ -5,6 +5,7 @@ render_mode unshaded, fog_disabled, ambient_light_disabled;
 //// NOTE README !!! When placing an openexr texture in a shader godot compresses it.
 //// REIMPORT the texture from the import tab and make it lossless.
 uniform sampler2D prerenderBackground : hint_normal;
+uniform float shadow_color_ratio: hint_range(0.0, 1.0, 0.01);
 
 uniform sampler2D screen_texture : hint_screen_texture, filter_linear;
 uniform sampler2D depth_texture : hint_depth_texture, filter_nearest;
@@ -60,14 +61,23 @@ void fragment() {
 	vec3 prerender_texture = texture(prerenderBackground, SCREEN_UV).rgb;
 	vec3 game_texture = texture(screen_texture, SCREEN_UV).rgb;
 	
-	// First we cap the linear depth. (If there is no mesh there the shader will think the distance is 4000 ish something.)
-	//// Issues arise if we dont cap this. Reduce cap if issues arise in not being able to see the player.bool
-	// Then we check if the player depthmap is less than the prerender depthmap.
-	if ((linear_depth < 1000.0) && (linear_depth <= prerender_depth)){
-		ALBEDO = game_texture;
+	// Special cases
+	if (game_texture == vec3(1.0, 0.0 ,1.0)) {
+		ALBEDO = (prerender_texture * shadow_color_ratio);
+		
 	}
+	
 	else{
-		ALBEDO = prerender_texture;
+		
+		// First we cap the linear depth. (If there is no mesh there the shader will think the distance is 4000 ish something.)
+		//// Issues arise if we dont cap this. Reduce cap if issues arise in not being able to see the player.bool
+		// Then we check if the player depthmap is less than the prerender depthmap.
+		if ((linear_depth < 1000.0) && (linear_depth <= prerender_depth)){
+			ALBEDO = game_texture;
+		}
+		else{
+			ALBEDO = prerender_texture;
+		}
 	}
 	
 	//// Various test functions.

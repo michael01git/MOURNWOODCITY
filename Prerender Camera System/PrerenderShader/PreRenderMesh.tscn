@@ -8,6 +8,7 @@
 render_priority = -1
 shader = ExtResource("1_mueb3")
 shader_parameter/prerenderBackground = ExtResource("2_dekov")
+shader_parameter/shadow_color_ratio = 0.249999994412
 
 [sub_resource type="QuadMesh" id="QuadMesh_rbbmx"]
 material = SubResource("ShaderMaterial_rttoq")

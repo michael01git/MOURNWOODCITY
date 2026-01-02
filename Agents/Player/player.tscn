@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://bvgg72dn3sj4b"]
+[gd_scene load_steps=17 format=3 uid="uid://bvgg72dn3sj4b"]
 
 [ext_resource type="Script" uid="uid://gh118a4fn21t" path="res://Agents/Player/player.gd" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://c8mf8mrahbqlp" path="res://Agents/Player/Statemachine/player_state_machine.gd" id="2_k53q1"]
+[ext_resource type="Material" uid="uid://datfp8wrl7ygd" path="res://Shaders/shadowmat.tres" id="2_oad4y"]
 [ext_resource type="Shader" uid="uid://ce2t1j7s8msje" path="res://Shaders/PSX/psx_mesh.gdshader" id="2_onrkg"]
 [ext_resource type="Script" uid="uid://bq8cud1o26ybw" path="res://Agents/Player/Statemachine/States/state_walk.gd" id="3_fhl08"]
 [ext_resource type="PackedScene" uid="uid://butx1tdyeqq70" path="res://Agents/Player/player_model.tscn" id="3_i3pqv"]
@@ -10,7 +11,15 @@
 [ext_resource type="Script" uid="uid://co14f1wlmyqvm" path="res://Agents/Player/Statemachine/States/shoot_state.gd" id="5_od3ui"]
 [ext_resource type="Script" uid="uid://c87elpbw8o4lh" path="res://Agents/Player/Inventory/inventory_state.gd" id="6_oad4y"]
 [ext_resource type="AudioStream" uid="uid://ncmrgf88bgax" path="res://Assets/Audio/mike_koenig-shotgun/10 Guage Shotgun-SoundBible.com-74120584.wav" id="9_00tjw"]
-[ext_resource type="Shader" uid="uid://cvbv0f1yj57m2" path="res://Shaders/DitherShader.gdshader" id="10_x3vf3"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_m5mgd"]
+material = ExtResource("2_oad4y")
+top_radius = 1.0
+bottom_radius = 1.0
+height = 0.001
+radial_segments = 8
+rings = 0
+cap_bottom = false
 
 [sub_resource type="AnimationRootNode" id="AnimationRootNode_od3ui"]
 
@@ -27,31 +36,16 @@ shader_parameter/resolution = Vector2i(320, 240)
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4flbx"]
 material = SubResource("ShaderMaterial_i3pqv")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x3vf3"]
-shading_mode = 2
-specular_mode = 2
-disable_ambient_light = true
-disable_fog = true
-disable_specular_occlusion = true
-albedo_color = Color(0, 0, 0, 1)
-disable_receive_shadows = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_apopc"]
-render_priority = 0
-shader = ExtResource("10_x3vf3")
-shader_parameter/color = Color(0, 0, 0, 0.8352941)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_od3ui"]
-material = SubResource("ShaderMaterial_apopc")
-height = 0.01
-radial_segments = 16
-rings = 1
-cap_bottom = false
-
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
 collision_layer = 3
 motion_mode = 1
 script = ExtResource("1_4flbx")
+
+[node name="ShadowSprite" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.9693706, 0)
+layers = 2
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_m5mgd")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../AnimationTree")
@@ -126,10 +120,3 @@ offset_right = 610.0
 offset_bottom = 228.0
 theme_override_font_sizes/font_size = 128
 text = "AAA"
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9693706, 0)
-layers = 2
-material_overlay = SubResource("StandardMaterial3D_x3vf3")
-cast_shadow = 0
-mesh = SubResource("CylinderMesh_od3ui")

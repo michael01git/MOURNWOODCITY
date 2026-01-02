@@ -1,9 +1,10 @@
 extends Control
-## Called from inventorystate
 
-@onready var items_resource = preload("res://Agents/Player/Inventory/inventory_resource.tres")
+@export var items: Array[InventoryItem]
 @export var focus_button: Button
 
+
+## Called from inventorystate
 func open_inventory():
 	visible = true
 	focus_button.grab_focus.call_deferred()

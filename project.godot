@@ -17,6 +17,10 @@ config/custom_user_dir_name="MWDM"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://Assets/icon.svg"
 
+[autoload]
+
+RadioManager="*res://Agents/Player/RadioFM/radio_manager.gd"
+
 [display]
 
 window/size/viewport_width=1280
