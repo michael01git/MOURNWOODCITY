@@ -1,7 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://butx1tdyeqq70"]
+[gd_scene format=3 uid="uid://butx1tdyeqq70"]
 
-[ext_resource type="PackedScene" uid="uid://b2fnk5jp4hkvu" path="res://Assets/Player/Model/characterMedium.fbx" id="1_vetj4"]
-[ext_resource type="Texture2D" uid="uid://djmqcjnwbxidy" path="res://Assets/Player/Skins/humanMaleA.png" id="2_8t616"]
+[ext_resource type="PackedScene" uid="uid://b2fnk5jp4hkvu" path="res://Assets/Models/Player/Model/characterMedium.fbx" id="1_vetj4"]
+[ext_resource type="Texture2D" uid="uid://djmqcjnwbxidy" path="res://Assets/Models/Player/Skins/humanMaleA.png" id="2_8t616"]
 [ext_resource type="Script" uid="uid://k7yspymqoo57" path="res://Agents/Player/player_model.gd" id="2_014or"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_014or"]

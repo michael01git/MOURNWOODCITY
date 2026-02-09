@@ -8,14 +8,18 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="CityGame"
 run/main_scene="uid://dwdaggof3crox"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="MWDM"
-config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://Assets/icon.svg"
+config/features=PackedStringArray("4.6", "Forward Plus")
+config/icon="uid://dkjr30r002t7"
 
 [display]
 
@@ -95,6 +99,6 @@ textures/webp_compression/compression_method=0
 shader_compiler/shader_cache/compress=false
 shader_compiler/shader_cache/use_zstd_compression=false
 textures/default_filters/anisotropic_filtering_level=0
+anti_aliasing/quality/use_debanding=true
 textures/decals/filter=0
 textures/light_projectors/filter=0
-anti_aliasing/quality/use_debanding=true
