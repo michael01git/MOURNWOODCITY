@@ -1,4 +1,5 @@
 extends State
+class_name ShootState
 
 @onready var idle_state: IdleState = $"../IdleState"
 @onready var shoot_sound: AudioStreamPlayer = $"../../ShootSound"

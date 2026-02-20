@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://dwdaggof3crox"]
+
+[ext_resource type="PackedScene" uid="uid://c4g5xvv514vbd" path="res://Agents/Player/Inventory/inventory_view.tscn" id="1_2kyup"]
+[ext_resource type="Shader" uid="uid://c3ir81fbbormo" path="res://Shaders/Pixelation/pixelator.gdshader" id="2_0kmpa"]
+[ext_resource type="PackedScene" uid="uid://d353126ncl6lg" path="res://Rooms/Levels/MWTESTLEVEL/test_level.tscn" id="3_54hns"]
+
+[sub_resource type="Animation" id="Animation_nuq7w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../ScreenView:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ckjt7"]
+resource_name = "shrink"
+length = 0.5
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../ScreenView:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(2, -2),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3y8li"]
+_data = {
+&"RESET": SubResource("Animation_nuq7w"),
+&"shrink": SubResource("Animation_ckjt7")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hipen"]
+shader = ExtResource("2_0kmpa")
+shader_parameter/pixelSize = 1
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_06ngt"]
+viewport_path = NodePath("SubViewport")
+
+[node name="MournwoodWindow" type="Control" unique_id=1158831924]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScreenShrinkView" type="AnimationPlayer" parent="." unique_id=961434855]
+root_node = NodePath("../InventoryView")
+libraries/ = SubResource("AnimationLibrary_3y8li")
+
+[node name="InventoryView" parent="." unique_id=1148297373 node_paths=PackedStringArray("shrink_view") instance=ExtResource("1_2kyup")]
+layout_mode = 1
+shrink_view = NodePath("../ScreenShrinkView")
+
+[node name="ScreenView" type="TextureRect" parent="." unique_id=1541584901]
+material = SubResource("ShaderMaterial_hipen")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_06ngt")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=701081382]
+size = Vector2i(1280, 960)
+
+[node name="TestLevel" parent="SubViewport" unique_id=471023452 instance=ExtResource("3_54hns")]

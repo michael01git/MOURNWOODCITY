@@ -19,12 +19,14 @@ func state_process(delta: float) -> void:
 	if Input.is_action_pressed("aim"):
 		next_state = shoot_state
 		
+	
 	move_player(delta)
 	
 	
 
 
 func move_player(delta: float):
+	
 	var horizontal_input: float = get_horizontal_input()
 	var turn_input: float = get_turn_input(delta)
 	

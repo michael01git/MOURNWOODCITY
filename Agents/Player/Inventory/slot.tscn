@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://riphvikjhvcy"]
+
+[ext_resource type="Script" uid="uid://dsq7fp4ew5q85" path="res://Agents/Player/Inventory/slot.gd" id="1_1xlw6"]
+
+[node name="Slot" type="Button" unique_id=279237201]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("1_1xlw6")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://c7voklbd48d3s"]
+
+[ext_resource type="Script" uid="uid://cv2nldk6pxkac" path="res://Agents/Player/Inventory/item.gd" id="1_j283m"]
+
+[resource]
+script = ExtResource("1_j283m")
+item_name = "Bandage"
+heal_amount = 1

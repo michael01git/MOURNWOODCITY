@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://b2yu4pa2lbfr3"]
+
+[ext_resource type="Script" uid="uid://ttgkq854w875" path="res://world_item.gd" id="1_j601j"]
+[ext_resource type="Resource" uid="uid://c7voklbd48d3s" path="res://Agents/Player/Inventory/Bandage.tres" id="2_u1wo0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j601j"]
+size = Vector3(0.25, 0.25, 0.25)
+
+[sub_resource type="SphereMesh" id="SphereMesh_u1wo0"]
+radius = 0.1
+height = 0.25
+
+[node name="WorldItem" type="Area3D" unique_id=1104996011]
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_j601j")
+item = ExtResource("2_u1wo0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1289847391]
+shape = SubResource("BoxShape3D_j601j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1460132480]
+mesh = SubResource("SphereMesh_u1wo0")

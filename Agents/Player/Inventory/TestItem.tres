@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://ori18vq7i7bw"]
+
+[ext_resource type="Script" uid="uid://cv2nldk6pxkac" path="res://Agents/Player/Inventory/item.gd" id="1_3ttve"]
+
+[resource]
+script = ExtResource("1_3ttve")
+item_name = "ItemTest"
