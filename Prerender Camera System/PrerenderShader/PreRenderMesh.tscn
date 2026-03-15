@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://kasm32g18vh6"]
+[gd_scene format=3 uid="uid://kasm32g18vh6"]
 
 [ext_resource type="Shader" uid="uid://do6iw7mthcn2a" path="res://Prerender Camera System/PrerenderShader/PreRenderMesh.gdshader" id="1_mueb3"]
 [ext_resource type="Texture2D" uid="uid://b2kafij7rmykl" path="res://Rooms/Levels/MWTESTLEVEL/newBG/room1.exr" id="2_dekov"]
@@ -13,7 +13,7 @@ shader_parameter/prerenderBackground = ExtResource("2_dekov")
 material = SubResource("ShaderMaterial_rttoq")
 size = Vector2(2, -2)
 
-[node name="PreRenderMesh" type="MeshInstance3D" groups=["PRM"]]
+[node name="PreRenderMesh" type="MeshInstance3D" unique_id=663493878 groups=["PRM"]]
 process_mode = 3
 cast_shadow = 0
 extra_cull_margin = 16384.0

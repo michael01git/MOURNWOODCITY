@@ -1,0 +1,275 @@
+body { margin: 0px; 
+padding:0px; 
+background-color: #ffffff; 
+background-image:url('images/bgshiningb.jpg');
+	background-repeat:repeat-x;
+	background-attachment:;
+	background-position:;
+	margin:0;
+	padding:0;
+	border:0;
+	width:100%; 
+	
+font-family: helvetica, arial, sans-serif; 
+font-size: 1em } 
+	
+	a img { border: 0px } 
+	
+	img { border: 0px} 
+	
+a:link { color: #f26c4f; text-decoration : none;} 
+
+a:visited 
+{ color: #9e402b; text-decoration : none;} 
+
+a:hover {text-decoration: underline; 
+color: #f26c4f;} 
+	
+a:active { color: #ab1f23; 
+text-decoration : none;} 
+
+
+p { font-size: 11pt; color: #111; font-family: 'roboto',  sans-serif;  line-height: 16pt;} 
+p.subheader { color: #898989;
+}
+
+
+strong{
+ font-weight:bold;
+}
+
+
+h1 {font-size: 26pt; font-family: 'Open Sans', arial, helvetica, sans-serif;  color: 
+#db372d;} 
+
+h2 {font-size: 18pt; font-family: 'Open Sans', arial, helvetica, sans-serif; color: 
+#000;} 
+
+h3 {font-size: 14pt; font-family: 'Open Sans', arial, helvetica, sans-serif; color: 
+#00bff3;} 
+
+h4{font-size: 11pt; font-family: 'Open Sans', arial, helvetica, sans-serif; color: 
+#000000; text-decoration: underline;} 
+
+
+blockquote {
+ FONT-SIZE: 10pt; color: #333; font-family: 'roboto',  sans-serif;  line-height: 15pt; 
+  } 
+
+
+blockquote {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 50px;
+  padding-left: 15px;
+  border-left: 3px solid #ccc;
+}
+
+.italic {
+  font-style: italic; color: #0072bc;
+  }
+
+
+
+ul { FONT-SIZE: 9pt; color: #000000} 
+
+li{ FONT-SIZE: 9pt; color: #000000} 
+
+ol{ 
+FONT-SIZE: 7pt; color: #000000} a{text-decoration:none} 
+
+.smalllight  {
+	FONT-SIZE: 10pt; color: #777;
+}
+
+.smallerlight  {
+	FONT-SIZE: 9pt; color: #777;
+}
+
+
+.smallcommentdark  {
+	FONT-SIZE: 7.5pt; color: #777;
+}
+
+
+
+
+
+#container
+{
+	margin:0;
+	padding:0;
+	border:0;
+	width:100%;
+	background: ;
+	  margin: 0px auto;
+
+}
+
+#header
+{
+	background: #ffffff;
+	clear: left;
+	margin:0px auto;
+	padding: 0px;
+	width:810px;
+        text-align: center;
+}
+
+#header 
+h1 {
+	margin: 10px 0 20px;
+	font-size: 3.3em;
+	font-weight: normal;
+	text-transform: uppercase;
+	letter-spacing: .05em;
+	word-spacing: .2em;
+	background: #ffffff;
+}
+
+
+
+#menu{
+  height: 40px;
+  background: #ffffff;
+   width:810px;
+        float:left;
+		overflow:hidden;
+		position:relative;
+		border: ; 
+}
+
+#menu ul{
+clear:left;
+  float:left;
+  left:50%;
+  position:relative;
+  text-align:center;
+  padding: 0px; /*Removes the customary indent of a list*/
+  margin: 0px; /*Removes the customary indent of a list*/
+  list-style: none; /*Removes the disc*/
+}
+
+#menu li{
+display:block;
+  float: left; /*Forces the links to align horizontally*/
+  position:relative;
+  right:50%;
+     font-size: 13px;
+  line-height: 40px; /*Set the line height, equals the height of the menu div*/
+  vertical-align: middle; /*Centres the text vertically*/
+  border-right: 1px #A35259 solid; /*Creates the light maroon spacer after each link*/
+  }
+
+#menu a{
+  padding: 0 5px 0 5px; /*Creates a little spacing on each side of the tabs text*/
+  text-decoration: none; /*Removes the standard line under a link*/
+  display: block; /*Forces the whole tab to highlight as apposed to only the text*/
+  color: #999999; /*Sets the colour of the text of the tab*/
+  background: #; /*Sets the background colour of the tab*/
+}
+
+#menu a:hover { /*Defines what the tab will look like when the mouse is hovered over the text*/
+  background: #b90e13; /*Sets the background colour of the tab*/
+  color: #ffffff; /*Sets the colour of tab's text*/
+  border-bottom: 1px #841922 solid; /*Create the illusion of the tab appearing behind the page*/
+  line-height: 39px; /*Line height is reduced by 1px to accommodate the bottom border and stop the tab from becoming misaligned*/
+}
+
+#menu .current{ /*Defines what the current pages tab must look like*/
+  background: #7da7d9;
+  color: #ffffff;
+  border-bottom: none;
+  line-height: 40px;
+     font-size: 13px;
+}
+
+#menu a:hover.current { /*Defines how the current pages tab must behave when the mouse is hovered over the tab*/
+  border-bottom: none;
+  line-height: 40px;
+     font-size: 13px;
+}
+
+#contentcontainer
+{
+	clear: left;
+	margin:0px auto;
+	padding:0px;
+        background: #ffffff;
+	width:810px;
+border: 1px solid #ccc; 
+}
+
+#content
+{
+margin: 5px auto;
+width:680px;
+background: #ffffff;
+
+}
+
+#content 
+p
+{	
+	margin: 0px;
+		line-height:150%;
+	margin: 5px 15px 15px 10px;
+}
+
+
+#contentcontainer2
+{
+	clear: left;
+	margin:0px auto;
+	padding:20px;
+        background: #ffffff;
+	width:1100px;
+border: 1px solid #ccc; 
+}
+
+img {
+    display: block;
+    margin: 0 auto;
+}
+.align-right { float:right; margin: 0 0 15px 15px; }
+
+
+.align-left  { float:left; margin: 0 15px 15px 0; }
+
+
+
+#contentcontainer2
+p
+{	
+	margin: 0px;
+		line-height:142%;
+	margin: 5px 15px 15px 10px;
+}
+
+
+
+
+
+
+
+#footer
+{
+	width: 810px;
+	clear: left;
+	margin: 0px auto;
+	 margin-top: 30px;
+	padding: 0px;
+	background-color: #ffffff;
+	border: 1px solid #ccc; 
+}
+
+#footer p
+{	 font-size: 8pt; color: #b93c08; font-family: 'roboto',  sans-serif;  line-height: 11pt;
+	margin: margin: 0px auto;
+}
+
+
+a.footlink:link { color: #b2a38b; text-decoration: none; }
+a.footlink:visited { color: #b2a38b; text-decoration: none; }
+a.footlink:active { color: #ffffff; text-decoration: none; }
+a.footlink:hover { color: #ffffff; text-decoration: none; }
